@@ -22,7 +22,7 @@ public class LoginPage {
         return new VerificationPage();
     }
 
-    public String invalidPassword(String login, String password, String invalidPassword) {
+    public String invalidPassword(String login, String invalidPassword) {
         for (int i = 0; i < 3; i++) {
             loginField.setValue(login);
             passwordField.setValue(invalidPassword);
@@ -32,7 +32,7 @@ public class LoginPage {
             passwordField.doubleClick().sendKeys(Keys.BACK_SPACE);
         }
         loginField.setValue(login);
-        passwordField.setValue(password);
+        passwordField.setValue(invalidPassword);
         loginButton.click();
         return errorPopupBlocked.shouldBe(visible).text();
     }

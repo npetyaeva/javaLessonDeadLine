@@ -30,8 +30,8 @@ public class DeadLineTest {
     void shouldCheckBlockedAfterEnteredThreeTimesInvalidPassword() {
         var userInfo = DataHelper.getUserInfo();
         var loginPage = new LoginPage();
-        var text = loginPage.invalidPassword(userInfo.getLogin(), userInfo.getPassword(), userInfo.getPassword() + "0");
-        assertEquals("Ошибка! Превышено допустимое количество попыток ввода пароля. Попробуйте авторизироваться позже.", text);
+        var text = loginPage.invalidPassword(userInfo.getLogin(), userInfo.getPassword() + "0");
+        assertEquals("Ошибка! Превышено допустимое количество попыток ввода пароля. Попробуйте авторизоваться позже.", text);
     }
 
     @Test
