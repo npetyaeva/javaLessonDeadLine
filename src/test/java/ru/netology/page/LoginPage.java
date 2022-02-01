@@ -16,17 +16,13 @@ public class LoginPage {
     private final SelenideElement errorPopupBlocked = $("[data-test-id='blocked'] .input__sub");
 
     public VerificationPage validLogin(String login, String password) {
-        loginField.setValue(login);
-        passwordField.setValue(password);
-        loginButton.click();
+        loginFunction(login, password);
         return new VerificationPage();
     }
 
     public String invalidPassword(String login, String invalidPassword) {
         for (int i = 0; i < 3; i++) {
-            loginField.setValue(login);
-            passwordField.setValue(invalidPassword);
-            loginButton.click();
+            loginFunction(login, invalidPassword);
             closeButton.shouldBe(visible).click();
             loginField.doubleClick().sendKeys(Keys.BACK_SPACE);
             passwordField.doubleClick().sendKeys(Keys.BACK_SPACE);
@@ -43,14 +39,18 @@ public class LoginPage {
     }
 
     public String emptyLogin(String password) {
-        passwordField.setValue(password);
-        loginButton.click();
+        loginFunction("", password);
         return errorPopupLogin.shouldBe(visible).text();
     }
 
     public String emptyPassword(String login) {
-        loginField.setValue(login);
-        loginButton.click();
+        loginFunction(login, "");
         return errorPopupPassword.shouldBe(visible).text();
+    }
+
+    private void loginFunction(String login, String password) {
+        loginField.setValue(login);
+        passwordField.setValue(password);
+        loginButton.click();
     }
 }
